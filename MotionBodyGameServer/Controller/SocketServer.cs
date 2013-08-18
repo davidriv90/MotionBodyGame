@@ -93,12 +93,9 @@ namespace MotionBodyGameServer.Controller
 
             this.readingService.Wait();
 
+            // Una vez que el proceso lector se ha cerrado a causa
+            //de un mensaje del cliente "end_game", se cierra la aplicación
             this.FinalizarServidor();
-            //this.informar(TipoMensaje.ESTADO, "Después de esperar");
-            //Validar inicio de transmisión?
-
-            //Envío de un mensaje de confirmación de conexión
-            //this.escritorMensaje.WriteLine(StandardMessages.START_GAME);
          }
          catch (Exception ex)
          {
@@ -144,14 +141,14 @@ namespace MotionBodyGameServer.Controller
          }
       }
 
+      /// <summary>
+      /// Se finalizan todos los servicios del socket y se procede a desencadenar un evento
+      /// que cierra la aplicación, en caso de estar implementado
+      /// </summary>
       private void FinalizarServidor()
       {
-         // Finalizar lector de mensajes del cliente
-         //Thread.Sleep(3000);
-
          if (null != this.readingService)
          {
-            //this.readingService.Wait();
             this.readingService.Dispose();
          }
 
@@ -163,8 +160,8 @@ namespace MotionBodyGameServer.Controller
 
          this.informar(TipoMensaje.ESTADO, "Conexión terminada");
 
-         Thread.Sleep(3000);
-
+         Thread.Sleep(1000);
+         
          this.cerrarApp();
       }
    }
