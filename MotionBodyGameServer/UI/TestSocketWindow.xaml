@@ -1,0 +1,12 @@
+﻿<Window x:Class="MotionBodyGameServer.UI.TestSocketWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TestSocketWindow" Height="200" Width="300" Closing="Window_Closing" Closed="Window_Closed">
+   <Grid>
+      <TextBlock HorizontalAlignment="Left" Margin="10,38,0,0" TextWrapping="Wrap" Text="Mensajes:" VerticalAlignment="Top" Width="100" Height="23"/>
+      <TextBox x:Name="txtEstado" HorizontalAlignment="Left" Height="23" Margin="115,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="167"/>
+      <TextBox x:Name="txtMensajes" HorizontalAlignment="Left" Height="97" Margin="10,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" />
+      <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Estado:" VerticalAlignment="Top" Width="100" Height="23"/>
+
+   </Grid>
+</Window>

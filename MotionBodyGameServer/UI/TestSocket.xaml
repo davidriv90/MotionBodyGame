@@ -1,0 +1,15 @@
+﻿<Window x:Class="MotionBodyGameServer.UI.TestSocket"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="TestSocket" Height="300" Width="400">
+   <Grid>
+      <Label Content="Estado:" HorizontalAlignment="Left" Margin="40,40,0,0" VerticalAlignment="Top" Width="120"/>
+      <TextBox x:Name="txtComunicacion" HorizontalAlignment="Left" Height="150" Margin="40,71,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320"/>
+      <TextBox x:Name="txtMensaje" HorizontalAlignment="Left" Height="23" Margin="40,226,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220"/>
+      <Button x:Name="btnEnviar" Content="Enviar" HorizontalAlignment="Left" Margin="285,227,0,0" VerticalAlignment="Top" Width="75" Click="btnEnviar_Click"/>
+      <TextBox x:Name="txtEstado" HorizontalAlignment="Left" Height="23" Margin="165,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="195"/>
+      <Button x:Name="btnIniciar" Content="Iniciar servidor" HorizontalAlignment="Left" Margin="40,10,0,0" VerticalAlignment="Top" Width="150" Click="btnIniciar_Click"/>
+      <Button x:Name="btnDetener" Content="Detener servidor" HorizontalAlignment="Left" Margin="210,10,0,0" VerticalAlignment="Top" Width="150" Click="btnDetener_Click"/>
+
+   </Grid>
+</Window>
