@@ -23,7 +23,7 @@ namespace MotionBodyGameServer.UI
       SocketServer socketServer;
       //SocketClient socketClient;
 
-      int port = 4322;
+      int port = 4321;
 
       public TestSocket()
       {
