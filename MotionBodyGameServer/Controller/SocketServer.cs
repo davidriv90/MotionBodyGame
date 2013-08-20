@@ -56,6 +56,11 @@ namespace MotionBodyGameServer.Controller
          listeningService.Start();
       }
 
+      /// <summary>
+      /// Permite ejecutar métodos en la interfaz de usuario en caso de estar asignados
+      /// </summary>
+      /// <param name="tipoMensaje"></param>
+      /// <param name="mensaje"></param>
       private void informar(TipoMensaje tipoMensaje, String mensaje)
       {
          switch (tipoMensaje)
@@ -72,6 +77,10 @@ namespace MotionBodyGameServer.Controller
          }
       }
 
+      /// <summary>
+      /// Permite iniciar los servicios que integran el socket para enviar
+      /// y recibir mensajes
+      /// </summary>
       private void EsperarCliente()
       {
          this.conector = this.listener.AcceptSocket();
@@ -83,10 +92,9 @@ namespace MotionBodyGameServer.Controller
             this.medioTransmisionMensajes = new NetworkStream(this.conector);
             this.lectorMensaje = new StreamReader(this.medioTransmisionMensajes);
             this.escritorMensaje = new StreamWriter(this.medioTransmisionMensajes);
+            this.escritorMensaje.AutoFlush = true;
 
             this.informar(TipoMensaje.MENSAJE_DEL_CLIENTE, this.escritorMensaje.Encoding.ToString());
-
-            this.escritorMensaje.AutoFlush = true;
 
             this.readingService = new Task(this.EscucharCliente);
             this.readingService.Start();
@@ -103,6 +111,10 @@ namespace MotionBodyGameServer.Controller
          }
       }
 
+      /// <summary>
+      /// Es el método que se ejecuta en otro proceso y que recibe y procesa los mensajes del
+      /// cliente TCP
+      /// </summary>
       private void EscucharCliente()
       {
          while (this.isReading)
@@ -127,6 +139,11 @@ namespace MotionBodyGameServer.Controller
          }
       }
 
+      /// <summary>
+      /// Envía un mensaje al cliente conectado, en caso de no haber un cliente conectado
+      /// se ejecuta el delegado que envía un mensaje a la interfaz de usuario
+      /// </summary>
+      /// <param name="msg"></param>
       public void EnviarMensajeAlAvatar(string msg)
       {
          try

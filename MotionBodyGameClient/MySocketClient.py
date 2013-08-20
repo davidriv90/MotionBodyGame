@@ -19,12 +19,12 @@ try:
    received = "";
    while True:
       received = sock.recv(1024)
+      print received
       sock.sendall("mensaje recibido" + "\n")
       print received.find("end_game")
       if received.find("end_game") == 0:
          sock.sendall("end_game" + "\n")
          print "finalizado"
          break
-      print received
 finally:
     sock.close()

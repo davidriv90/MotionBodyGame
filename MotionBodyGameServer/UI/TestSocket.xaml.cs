@@ -20,7 +20,8 @@ namespace MotionBodyGameServer.UI
    /// </summary>
    public partial class TestSocket : Window
    {
-      SocketServer socket;
+      //SocketServer socketServer;
+      SocketClient socketClient;
 
       public TestSocket()
       {
@@ -29,39 +30,43 @@ namespace MotionBodyGameServer.UI
 
       private void btnEnviar_Click(object sender, RoutedEventArgs e)
       {
-         if (null == this.socket) 
+         //if (null == this.socketServer)
+         if(null == this.socketClient)
          { 
             MessageBox.Show("Hay que iniciar el servidor");
             return;
          }
 
          this.AddMessageFromServer(this.txtMensaje.Text);
-         this.socket.EnviarMensajeAlAvatar(this.txtMensaje.Text);
+         //this.socketServer.EnviarMensajeAlAvatar(this.txtMensaje.Text);
+         this.socketClient.SendMessage(this.txtMensaje.Text);
       }
 
       private void btnIniciar_Click(object sender, RoutedEventArgs e)
       {
-         if (null != this.socket) { return; }
+         //if (null != this.socketServer) 
+         if(null != this.socketClient)
+         { return; }
 
-         this.socket = new SocketServer(4321);
+         //this.socketServer = new SocketServer(4321);
+         this.socketClient = new SocketClient("localhost", 4321);
 
-         this.socket.informarEstado += this.SetState;
-         this.socket.informarError += this.SetErrorMessage;
-         this.socket.informarMensajeCliente += this.AddMessageFromClient;
+         //this.socketServer.informarEstado += this.SetState;
+         //this.socketServer.informarError += this.SetErrorMessage;
+         //this.socketServer.informarMensajeCliente += this.AddMessageFromClient;
+         //this.socketServer.cerrarApp += this.closeApp;
 
-         this.socket.cerrarApp += this.closeApp;
+         this.socketClient.informarEstado += this.SetState;
+         this.socketClient.informarError += this.SetErrorMessage;
+         this.socketClient.informarMensajeServidor += this.AddMessageFromClient;
+         this.socketClient.cerrarApp += this.closeApp;
 
-         this.socket.StartServer();
+         //this.socketServer.StartServer();
+         this.socketClient.StartClient();
       }
 
       private void SetState(String msg)
       {
-         //if (msg.Contains(StandardMessages.END_GAME))
-         //{
-         //   // Una vez que se ha salido del ciclo, es importante cerrar la conexión del lado del servidor
-         //   this.socket.FinalizarServidor();
-         //}
-
          this.txtEstado.Dispatcher.Invoke(new Action(
             delegate()
             {
@@ -97,8 +102,8 @@ namespace MotionBodyGameServer.UI
 
       private void btnDetener_Click(object sender, RoutedEventArgs e)
       {
-         this.socket.EnviarMensajeAlAvatar(StandardMessages.END_GAME);
-         //this.socket.FinalizarServidor();
+         //this.socketServer.EnviarMensajeAlAvatar(StandardMessages.END_GAME);
+         this.socketClient.SendMessage(StandardMessages.END_GAME);
       }
 
       private void closeApp()

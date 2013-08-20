@@ -37,3 +37,4 @@ MotionBodyGameServer/obj/Debug/UI/TestSocket.g.i.cs
 MotionBodyGameServer/obj/Debug/UI/TestSocketWindow.baml
 MotionBodyGameServer/obj/Debug/UI/TestSocketWindow.g.cs
 MotionBodyGameServer/obj/Debug/UI/TestSocketWindow.g.i.cs
+*.suo
